@@ -25,7 +25,7 @@ app.get('/cards', function (req, res) {
     FlashCardModel.find(modelParams, function (err, cards) {
         setTimeout(function () {
             res.send(cards);
-        }, Math.random() * 1000);
+        }, Math.random() * 500);
     });
 
 });
