@@ -17,9 +17,9 @@ app.controller('MainController', function ($scope, FlashCardsFactory) {
 
     $scope.selectCategory = function(category) {
         $scope.loading = true;
+        $scope.selectedCategory = category;
         FlashCardsFactory.getFlashCards(category).then(function(flashCards) {
             $scope.flashCards = flashCards;
-            $scope.selectedCategory = category;
             $scope.loading = false;
         });
     };
