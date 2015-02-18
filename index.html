@@ -9,9 +9,10 @@
 		<script src="js/controllers/FlashCardController.js"></script>
 		<script src="js/controllers/MainController.js"></script>
 		<script src="js/controllers/StatsController.js"></script>
-		<script src="js/factories/FlashCardsFactory.js"></script>
 		<script src="js/factories/ScoreFactory.js"></script>
 		<script src="js/filters/cheat.js"></script>
+		<script src="js/directives/loader/loader.js"></script>
+		<script src="js/directives/flashcards/flashcard.js"></script>
 	</head>
 
 	<body>
@@ -23,22 +24,13 @@
 				</button>
 				<button class="category-button" ng-click="selectCategory()" ng-class="{active: selectedCategory == undefined}">All</button>
 
-				<div ng-repeat="flashCard in flashCards | orderBy:'question'" ng-controller="FlashCardController" class="flash-card">
-					<h1>{{ flashCard.question | uppercase }}</h1>
-					<h3>{{ flashCard.category }}</h3>
-					<ul class="flash-card-answers">
-						<li class="flash-card-answer"
-							ng-click="answerQuestion(answer)"
-							ng-repeat="answer in flashCard.answers | cheat">
-							{{ answer.text }}
-						</li>
-					</ul>
-					<h2 class="answer-feedback"
-						ng-class="{ correct: answeredCorrectly, incorrect: !answeredCorrectly }"
-						ng-show="answered">
-						<span ng-show="answeredCorrectly">Yeah, you got it right!</span>
-						<span ng-show="!answeredCorrectly">Nope, you got it wrong.</span>
-					</h2>
+				<div ng-show="loading">
+					<loader></loader>
+				</div>
+
+				<div ng-hide="loading">
+					<flash-card ng-repeat="flashCard in flashCards" card="flashCard">
+					</flash-card>
 				</div>
 
 			</div>
