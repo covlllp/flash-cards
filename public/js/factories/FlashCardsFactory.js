@@ -13,5 +13,9 @@ app.factory('FlashCardsFactory', function ($http) {
 		});
 	};
 
+	factory.addNewCard = function(card) {
+		return $http.post('/cards', card);
+	}
+
 	return factory;
 });

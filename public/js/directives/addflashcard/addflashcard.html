@@ -1,0 +1,41 @@
+<div class="add-card">
+	<h1>Add A New FlashCard!</h1>
+
+	<!-- This is wrong -->
+	<h2 ng-show="addCardForm.$invalid && addCardForm.$submitted" style="color:red;">
+		Form is invalid
+	</h2>
+	<h2 ng-show="addCardForm.$valid && addCardForm.$submitted" style="color:green;">
+		Flashcard was added!
+	</h2>
+
+
+	<form
+		name="addCardForm"
+		ng-submit="addCardForm.$valid && submitCard(card)">
+
+		<p>Question:
+			<input
+				required ng-minlength="10"
+				type="text"name="question"
+				ng-model="card.question">
+		</p>
+		<p>Category:
+			<select required name="category" ng-model="card.category">
+				<option value="{{category}}" ng-repeat="category in cardCategories">
+				{{ category | json }}
+				</option>
+			</select>
+		</p>
+		<p>
+			<div ng-repeat="i in [0, 1, 2]">
+			Answer {{i + 1}}:
+				<input required type="text" name="ans{{i}}" ng-model="card.answers[i].text">
+				<input required type="radio" name="anscorr" ng-click="radioClick(i)" ng-value="true" ng-model="card.answers[i].correct">Correct?<br>
+			</div>
+		</p>
+		<p>
+			<button type="submit">Submit Flashcard</button>
+		</p>
+	</form>
+</div>

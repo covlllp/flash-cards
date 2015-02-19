@@ -13,13 +13,17 @@
 		<script src="js/filters/cheat.js"></script>
 		<script src="js/directives/loader/loader.js"></script>
 		<script src="js/directives/flashcards/flashcard.js"></script>
+		<script src="js/directives/addflashcard/addflashcard.js"></script>
 		<script src="js/directives/border-on-hover.js"></script>
 	</head>
 
 	<body>
-		<div ng-app="FlashCards">
+		<div ng-app="FlashCards" ng-controller="MainController">
 			<div ng-include="'templates/scoreboard.html'"></div>
-			<div ng-controller="MainController">
+
+			<add-flash-card card-categories="categories"></add-flash-card>
+
+			<div>
 				<button class="category-button"
 					ng-click="selectCategory(category)"
 					ng-repeat="category in categories"
@@ -44,11 +48,7 @@
 					<flash-card ng-repeat="flashCard in flashCards" card="flashCard">
 					</flash-card>
 				</div>
-
 			</div>
-			
 		</div>
-
 	</body>
-
 </html>
